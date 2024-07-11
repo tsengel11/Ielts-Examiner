@@ -1,0 +1,15 @@
+version: '3.11'
+
+services:
+  fastapi:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: bind
+        source: ./app
+        target: /usr/src/app
+    env_file:
+     - .env
+    
+    command: poetry run uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
